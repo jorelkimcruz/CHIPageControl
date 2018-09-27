@@ -38,7 +38,7 @@ open class CHIPageControlAji: CHIBasePageControl {
     fileprivate var inactive = [CHILayer]()
     fileprivate var active = CHILayer()
     
-    var delegate : PageControlDelegate?
+    public var delegate : PageControlDelegate?
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
