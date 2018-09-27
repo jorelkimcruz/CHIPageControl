@@ -25,7 +25,7 @@
 
 import UIKit
 
-protocol PageControlDelegate {
+public protocol PageControlDelegate {
     func didClickIndex(_ index:Int)
 }
 
@@ -38,7 +38,7 @@ open class CHIPageControlAji: CHIBasePageControl {
     fileprivate var inactive = [CHILayer]()
     fileprivate var active = CHILayer()
     
-    public var delegate : PageControlDelegate?
+    var delegate : PageControlDelegate?
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
