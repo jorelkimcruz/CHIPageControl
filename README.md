@@ -25,7 +25,7 @@ Just add the `CHIPageControl` folder to your project.
 use [CocoaPods](https://cocoapods.org) with Podfile:
 ```
 # individual page control
-pod 'CHIPageControl/Aji'  :git => 'https://github.com/jorelkimcruz/CHIPageControl.git'
+pod 'CHIPageControl/Aji',  :git => 'https://github.com/jorelkimcruz/CHIPageControl.git'
 ```
 
 ## Usage
