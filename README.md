@@ -1,19 +1,18 @@
-# CHIPageControl
+# CHIPageControl For SALPay
 
-CHIPageControl is a set of cool animated page controls to replace boring UIPageControl.
-We were inspired by [Jardson Almeida dribbble shot](https://dribbble.com/shots/2578447-Page-Control-Indicator-Transitions-Collection) and implemented a few more page controls.
+CHIPageControl/aji is an updated aji animated page control to replace boring UIPageControl.
 
+forked with ChilliLabs [CHIPageControl]((https://github.com/ChiliLabs/CHIPageControl.git))
 Made with ❤️ by [Chili](http://chi.lv).
+
+Forked/Updated by Jorel Cruz
 
 ## Overview
 
 <img src="Images/demo.gif" width="600" height="450">
 
 ## Requirements
-
-* iOS 8.0+
-* Xcode 8+
-* Swift 3
+* Swift 4.2
 
 ## Installation
 
@@ -24,26 +23,10 @@ Just add the `CHIPageControl` folder to your project.
 ### CocoaPods
 
 use [CocoaPods](https://cocoapods.org) with Podfile:
-``` ruby
-pod 'CHIPageControl', '~> 0.1.3'
-
+```
 # individual page control
-pod 'CHIPageControl/Aji'
-pod 'CHIPageControl/Aleppo'
-pod 'CHIPageControl/Chimayo'
-pod 'CHIPageControl/Fresno'
-pod 'CHIPageControl/Jalapeno'
-pod 'CHIPageControl/Jaloro'
-pod 'CHIPageControl/Paprika'
-pod 'CHIPageControl/Puya'
+pod 'CHIPageControl/Aji'  :git => 'https://github.com/jorelkimcruz/CHIPageControl.git'
 ```
-### Carthage
-
-use [Carthage](https://github.com/Carthage/Carthage) with Cartfile
-```ogdl
-github "ChiliLabs/CHIPageControl" ~> 0.1.3
-```
-
 
 ## Usage
 ### 🎨 Storyboards
@@ -82,19 +65,17 @@ pageControl.set(progress: 2, animated: true)
 
 <img src="Images/Aji.gif" width="100" height="50"> CHIPageControlAji
 
-<img src="Images/Aleppo.gif" width="100" height="50"> CHIPageControlAleppo
+### PageControlDelegate
+``` swift 
 
-<img src="Images/Chimayo.gif" width="100" height="50"> CHIPageControlChimayo
+//set delegate
+pagecontrol.delegate = self
 
-<img src="Images/Fresno.gif" width="100" height="50"> CHIPageControlFresno
-
-<img src="Images/Jalapeno.gif" width="100" height="50"> CHIPageControlJalapeno
-
-<img src="Images/Jaloro.gif" width="100" height="50"> CHIPageControlJaloro
-
-<img src="Images/Paprika.gif" width="100" height="50"> CHIPageControlPaprika
-
-<img src="Images/Puya.gif" width="100" height="50"> CHIPageControlPuya
+// Returns clicked control
+func didClickIndex(_ index:Int) {
+    
+}
+```
 
 ## License
 CHIPageControl is released under the MIT license. See [LICENSE](./LICENSE) for details.
