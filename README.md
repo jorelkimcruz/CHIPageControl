@@ -9,7 +9,7 @@ Forked/Updated by Jorel Cruz
 
 ## Overview
 
-<img src="Images/demo.gif" width="600" height="450">
+<img src="Images/Aji.gif" width="600" height="450">
 
 ## Requirements
 * Swift 4.2
