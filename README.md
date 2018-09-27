@@ -2,7 +2,7 @@
 
 CHIPageControl/aji is an updated aji animated page control to replace boring UIPageControl.
 
-forked with ChilliLabs [CHIPageControl]((https://github.com/ChiliLabs/CHIPageControl.git))
+forked with ChilliLabs [CHIPageControl](https://github.com/ChiliLabs/CHIPageControl.git)
 Made with ❤️ by [Chili](http://chi.lv).
 
 Forked/Updated by Jorel Cruz
