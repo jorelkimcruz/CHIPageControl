@@ -25,37 +25,43 @@
 
 import UIKit
 
+protocol PageControlDelegate {
+    func didClickIndex(_ index:Int)
+}
+
 open class CHIPageControlAji: CHIBasePageControl {
     
     fileprivate var diameter: CGFloat {
         return radius * 2
     }
-
+    
     fileprivate var inactive = [CHILayer]()
     fileprivate var active = CHILayer()
-
+    
+    var delegate : PageControlDelegate?
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
     }
-
+    
     override func updateNumberOfPages(_ count: Int) {
         inactive.forEach { $0.removeFromSuperlayer() }
         inactive = [CHILayer]()
         inactive = (0..<count).map {_ in
             let layer = CHILayer()
             self.layer.addSublayer(layer)
+            
             return layer
         }
-
+        
         self.layer.addSublayer(active)
         setNeedsLayout()
         self.invalidateIntrinsicContentSize()
     }
-
+    
     override open func layoutSubviews() {
         super.layoutSubviews()
         
@@ -63,44 +69,67 @@ open class CHIPageControlAji: CHIBasePageControl {
         let x = (self.bounds.size.width - self.diameter*floatCount - self.padding*(floatCount-1))*0.5
         let y = (self.bounds.size.height - self.diameter)*0.5
         var frame = CGRect(x: x, y: y, width: self.diameter, height: self.diameter)
-
+        
         active.cornerRadius = self.radius
         active.backgroundColor = (self.currentPageTintColor ?? self.tintColor)?.cgColor
         active.frame = frame
-
+        
         inactive.enumerated().forEach() { index, layer in
             layer.backgroundColor = self.tintColor(position: index).withAlphaComponent(self.inactiveTransparency).cgColor
             if self.borderWidth > 0 {
                 layer.borderWidth = self.borderWidth
                 layer.borderColor = self.tintColor(position: index).cgColor
+                
             }
+            
+            layer.name = "\(index)"
             layer.cornerRadius = self.radius
             layer.frame = frame
             frame.origin.x += self.diameter + self.padding
         }
         update(for: progress)
     }
-
+    
+    
+    
+    // Check for touches
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let location = touches.first?.location(in: self) else {
+            return
+        }
+        for layer in self.layer.sublayers! where layer.hitTest(location) != nil {
+            guard let dlgt = delegate else {
+                return
+            }
+            guard let name = layer.name, let index = Int("\(name)") else {
+                return
+            }
+            dlgt.didClickIndex(index)
+            break
+        }
+    }
+    
+    
     override func update(for progress: Double) {
         guard let min = inactive.first?.frame,
-              let max = inactive.last?.frame,
-              numberOfPages > 1,
-              progress >= 0 && progress <= Double(numberOfPages - 1) else {
+            let max = inactive.last?.frame,
+            numberOfPages > 1,
+            progress >= 0 && progress <= Double(numberOfPages - 1) else {
                 return
         }
-
+        
         let total = Double(numberOfPages - 1)
         let dist = max.origin.x - min.origin.x
         let percent = CGFloat(progress / total)
-
+        
         let offset = dist * percent
         active.frame.origin.x = min.origin.x + offset
     }
-
+    
     override open var intrinsicContentSize: CGSize {
         return sizeThatFits(CGSize.zero)
     }
-
+    
     override open func sizeThatFits(_ size: CGSize) -> CGSize {
         return CGSize(width: CGFloat(inactive.count) * self.diameter + CGFloat(inactive.count - 1) * self.padding,
                       height: self.diameter)
